@@ -5,7 +5,7 @@ public class Aventurier extends Personnage {
 
 
     public Aventurier(String username){
-        super(username,0,0,"clear", 100,0,10,10,50,50, 100,50, 50);
+        super(username,0,0,"clear", 100,0,10,10,50,50, 100,50, 50,0,0,new Arme("épée", 0 ),new Armure("armure", 0));
     }
 
     public void boostAttaque(int i){

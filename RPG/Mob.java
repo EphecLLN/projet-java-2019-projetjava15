@@ -33,8 +33,11 @@ public class Mob {
         this.setFaiblesse(faiblesse);
     }
 
-    public void attaque(Personnage cible, int attaque){
-        cible.setHp(cible.getHp() - (attaque - cible.getDefense()) );
-
+    public void attaque(Personnage cible){
+        int degats = (this.getAttaque() - (cible.getDefense() + cible.getArmure().getDefense()));
+        if (degats <= 0){
+            degats =1;
+        }
+        cible.setHp(cible.getHp()-degats);
     }
 }

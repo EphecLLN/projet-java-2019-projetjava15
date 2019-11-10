@@ -13,7 +13,7 @@ public class Mage extends Personnage {
     }
 
     public Mage(String username){
-        super(username, 0, 0, "clear",75,0,5, 5,150,50,75,50,150);
+        super(username, 0, 0, "clear",75,0,5, 5,150,50,75,50,150,0,0,new Arme("baton",0), new Armure("robe",0));
         this.setPuissanceMagique(10);
     }
 
@@ -24,7 +24,7 @@ public class Mage extends Personnage {
      * @param type type des dégats ("feu", "foudre" ou "glace")
      */
     public void sort(Mob cible, String type){
-        int degats = this.getPuissanceMagique();
+        int degats = this.getPuissanceMagique()+this.getArme().getPuissanceMagique();
         if (cible.getFaiblesse() == type){
             degats *=2;
         }

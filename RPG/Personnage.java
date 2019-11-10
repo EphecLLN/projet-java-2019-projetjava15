@@ -67,6 +67,12 @@ public class Personnage {
     public void setPosY(int posY) {
         this.posY = posY;
     }
+    public void setArmure(Armure armure) {
+        this.armure = armure;
+    }
+    public void setArme(Arme arme) {
+        this.arme = arme;
+    }
 
     //getters
     public String getUsername() {
@@ -114,9 +120,15 @@ public class Personnage {
     public int getPosY() {
         return posY;
     }
+    public Arme getArme() {
+        return arme;
+    }
+    public Armure getArmure() {
+        return armure;
+    }
 
     //constructeur
-    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int croissanceExp, int maxMana){
+    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int croissanceExp, int maxMana, int posX, int posY, Arme arme, Armure armure){
         this.setUsername(username);
         this.setNiveau(niveau);
         this.setExp(exp);
@@ -130,6 +142,10 @@ public class Personnage {
         this.setHpMax(hpMax);
         this.setCroissanceExp(croissanceExp);
         this.setMaxMana(maxMana);
+        this.setArme(arme);
+        this.setArmure(armure);
+        this.setPosX(posX);
+        this.setPosY(posY);
     }
 
     /**
@@ -173,10 +189,10 @@ public class Personnage {
     /**
      * retire des hp égaux à la quantité passée en paramètre à la cible passée en paramètre
      * @param cible ennemi subissant les dégats
-     * @param attaque quantité de dégats infligés
+     * 
      */
-    public void attaque(Mob cible,int attaque){
-        cible.setHp(cible.getHp() - attaque);
+    public void attaque(Mob cible){
+        cible.setHp(cible.getHp() - (this.getAttaque()+this.getArme().getAttaque()));
     }
 
     @Override
