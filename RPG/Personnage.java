@@ -10,11 +10,15 @@ public class Personnage {
     private String etat;
     private int hp;
     private int hpMax;
+    private int croissanceHp;//quantité de hpMax gagnée par niveau
     private int nbPieces;
     private int attaque;
+    private int croissanceAttaque;//quantité d'attaque gagnée par niveau
     private int defense;
+    private int croissanceDefense;//quantité de defense gagnée par niveau
     private int mana;
     private int maxMana;
+    private int croissanceMana;//quantité de mana gagnée par niveau
     private int posX;
     private int posY;
     private Armure armure;
@@ -73,6 +77,18 @@ public class Personnage {
     public void setArme(Arme arme) {
         this.arme = arme;
     }
+    public void setCroissanceAttaque(int croissanceAttaque) {
+        this.croissanceAttaque = croissanceAttaque;
+    }
+    public void setCroissanceDefense(int croissanceDefense) {
+        this.croissanceDefense = croissanceDefense;
+    }
+    public void setCroissanceHp(int croissanceHp) {
+        this.croissanceHp = croissanceHp;
+    }
+    public void setCroissanceMana(int croissanceMana) {
+        this.croissanceMana = croissanceMana;
+    }
 
     //getters
     public String getUsername() {
@@ -126,26 +142,43 @@ public class Personnage {
     public Armure getArmure() {
         return armure;
     }
+    public int getCroissanceAttaque() {
+        return croissanceAttaque;
+    }
+    public int getCroissanceDefense() {
+        return croissanceDefense;
+    }
+    public int getCroissanceHp() {
+        return croissanceHp;
+    }
+    public int getCroissanceMana() {
+        return croissanceMana;
+    }
+
 
     //constructeur
-    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int croissanceExp, int maxMana, int posX, int posY, Arme arme, Armure armure){
+    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int maxMana, int posX, int posY, Arme arme, Armure armure, int croissanceHp, int croissanceMana,int croissanceAttaque, int croissanceDefense){
         this.setUsername(username);
         this.setNiveau(niveau);
         this.setExp(exp);
+        this.setExpLvlUp(expLvlUp);
+        this.setCroissanceExp(50);
         this.setEtat(etat);
         this.setHp(hp);
+        this.setHpMax(hpMax);
         this.setNbPieces(nbPieces);
         this.setAttaque(attaque);
         this.setMana(mana);
         this.setDefense(defense);
-        this.setExpLvlUp(expLvlUp);
-        this.setHpMax(hpMax);
-        this.setCroissanceExp(croissanceExp);
         this.setMaxMana(maxMana);
         this.setArme(arme);
         this.setArmure(armure);
         this.setPosX(posX);
         this.setPosY(posY);
+        this.setCroissanceHp(croissanceHp);
+        this.setCroissanceMana(croissanceMana);
+        this.setCroissanceAttaque(croissanceAttaque);
+        this.setCroissanceDefense(croissanceDefense);
     }
 
     /**
@@ -155,19 +188,25 @@ public class Personnage {
      */
     public void expUp(int i){
         int newExp = this.getExp() + i;
-        while (newExp > expLvlUp) {
-            newExp -= expLvlUp;
+        while (newExp > this.getExpLvlUp()) {
+            newExp -= this.getExpLvlUp();
             this.lvlUp();
-            this.setExpLvlUp( expLvlUp + this.getCroissanceExp() );
         }
         this.setExp(newExp);
     }
 
     /**
-     * incrémente le niveau du personnage
+     * incrémente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max
      */
     public void lvlUp(){
         this.setNiveau(this.getNiveau() + 1);
+        this.setExpLvlUp( this.getExpLvlUp() + this.getCroissanceExp());
+        this.setDefense(this.getDefense() + this.getCroissanceDefense());
+        this.setAttaque(this.getAttaque() + this.getCroissanceAttaque());
+        this.setMaxMana(this.getMaxMana() + this.getCroissanceMana());
+        this.setMana(this.getMaxMana());
+        this.setHpMax(this.getHpMax() + this.getCroissanceHp());
+        this.setHp(this.getHpMax());
     }
 
 
@@ -189,7 +228,7 @@ public class Personnage {
     /**
      * retire des hp égaux à la quantité passée en paramètre à la cible passée en paramètre
      * @param cible ennemi subissant les dégats
-     * 
+     *
      */
     public void attaque(Mob cible){
         cible.setHp(cible.getHp() - (this.getAttaque()+this.getArme().getAttaque()));

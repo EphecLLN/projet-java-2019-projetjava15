@@ -40,4 +40,7 @@ public class Mob {
         }
         cible.setHp(cible.getHp()-degats);
     }
+    public void stun(Personnage cible){
+        cible.setEtat("stun");
+    }
 }

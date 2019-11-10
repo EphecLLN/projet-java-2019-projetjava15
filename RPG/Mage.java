@@ -13,7 +13,7 @@ public class Mage extends Personnage {
     }
 
     public Mage(String username){
-        super(username, 0, 0, "clear",75,0,5, 5,150,50,75,50,150,0,0,new Arme("baton",0), new Armure("robe",0));
+        super(username, 0, 0, "clear",75,0,5, 5,150,50,75,150,0,0,new Arme("baton",0), new Armure("robe",0),2,15,1,1);
         this.setPuissanceMagique(10);
     }
 
