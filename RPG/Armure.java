@@ -45,4 +45,9 @@ public class Armure {
         }
 
     }
+    
+    public String toString() {
+    	return "type: "+ type + ", lvl:  "+ niveau;
+    }
+
 }

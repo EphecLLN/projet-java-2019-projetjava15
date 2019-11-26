@@ -41,7 +41,7 @@ public class Arme {
         this.setNiveau(niveau);
         this.setType(type);
         switch (type){
-            case "Ã©pÃ©e":
+            case "épée":
                 this.setAttaque((int) (5* Math.pow(2, niveau)));
                 this.setPuissanceMagique(0);
                 break;
@@ -55,5 +55,10 @@ public class Arme {
                 break;
         }
     }
+    
+    public String toString() {
+    	return "type: "+ type + ", lvl:  "+ niveau;
+    }
+
 
 }
