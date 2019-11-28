@@ -41,7 +41,7 @@ public class Map {
                 ground[i][j] = "sand";
             }
         }
-        Mob[] mobs = {new Mob(50,10,"fire",(int) (Math.random() * (ground[0].length-1)), (int)(Math.random()* (ground.length-1)))};
+        Mob[] mobs = {new Mob(50,20,"fire",(int) (Math.random() * (ground[0].length-1)), (int)(Math.random()* (ground.length-1)))};
         this.setGround(ground);
         this.setPerso(perso);
         this.setMobList(mobs);
