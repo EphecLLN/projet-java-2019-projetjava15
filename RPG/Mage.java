@@ -25,25 +25,10 @@ public class Mage extends Personnage {
      */
     public void sort(Mob cible, String type){
         int degats = this.getPuissanceMagique()+this.getArme().getPuissanceMagique();
-        
         if (cible.getFaiblesse() == type){
-        	cible.setHp(cible.getHp() - 2 * degats);
+            degats *=2;
         }
-        else {
-        	cible.setHp(cible.getHp() - degats);
-        }
-        
-        
-    }
-    
-    
-    public String toString() {
-    	return super.toString();
-    }
-    
-    public static void main(String [] args) {
-    	Mage m = new Mage("Mage");
-    	System.out.println(m);
+        cible.setHp(cible.getHp() - degats);
     }
 
 }

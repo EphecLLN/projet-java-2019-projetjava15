@@ -2,6 +2,7 @@ package RPG;
 
 public class Arme {
 
+    //attributs
     private String type; // épée, baton ou dague
     private int niveau; // tier de l'équipement(0=base, 1=amélioré ou 2=meilleur)
     private int puissanceMagique;
@@ -41,7 +42,7 @@ public class Arme {
         this.setNiveau(niveau);
         this.setType(type);
         switch (type){
-            case "�p�e":
+            case "épée":
                 this.setAttaque((int) (5* Math.pow(2, niveau)));
                 this.setPuissanceMagique(0);
                 break;
@@ -55,10 +56,5 @@ public class Arme {
                 break;
         }
     }
-    
-    public String toString() {
-    	return "type: "+ type + ", lvl:  "+ niveau;
-    }
-
 
 }

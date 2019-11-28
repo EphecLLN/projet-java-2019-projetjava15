@@ -1,57 +1,29 @@
 package RPG;
 
-import RPG.Arme;
-import RPG.Armure;
-import RPG.Mob;
-
 public class Personnage {
 
+    //attributs
     private String username;
     private int niveau;
     private int exp;
-    private int expLvlUp; //exp ‡† atteindre pour le prochain niveau
-    private int croissanceExp; //quantitÈ d'exp qui s'ajoute ‡ expLvlUp par niveau
+    private int expLvlUp; //exp √† atteindre pour le prochain niveau
+    private int croissanceExp; //quantit√© d'exp qui s'ajoute √† expLvlUp par niveau
     private String etat;
     private int hp;
     private int hpMax;
-    private int croissanceHp;//quantitÈ de hpMax gagnÈe par niveau
+    private int croissanceHp;//quantit√© de hpMax gagn√©e par niveau
     private int nbPieces;
     private int attaque;
-    private int croissanceAttaque;//quantitÈ d'attaque gagnÈe par niveau
+    private int croissanceAttaque;//quantit√© d'attaque gagn√©e par niveau
     private int defense;
-    private int croissanceDefense;//quantitÈ de defense gagnÈe par niveau
+    private int croissanceDefense;//quantit√© de defense gagn√©e par niveau
     private int mana;
     private int maxMana;
-    private int croissanceMana;//quantitÈ de mana gagnÈe par niveau
+    private int croissanceMana;//quantit√© de mana gagn√©e par niveau
     private int posX;
     private int posY;
     private Armure armure;
     private Arme arme;
-    
-  //constructeur
-    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int maxMana, int posX, int posY, Arme arme, Armure armure, int croissanceHp, int croissanceMana,int croissanceAttaque, int croissanceDefense){
-        this.setUsername(username);
-        this.setNiveau(niveau);
-        this.setExp(exp);
-        this.setExpLvlUp(expLvlUp);
-        this.setCroissanceExp(50); // Croissance d'expÈrience dÈfini par dÈfaut ‡ 50.
-        this.setEtat(etat);
-        this.setHp(hp);
-        this.setHpMax(hpMax);
-        this.setNbPieces(nbPieces);
-        this.setAttaque(attaque);
-        this.setMana(mana);
-        this.setDefense(defense);
-        this.setMaxMana(maxMana);
-        this.setArme(arme);
-        this.setArmure(armure);
-        this.setPosX(posX);
-        this.setPosY(posY);
-        this.setCroissanceHp(croissanceHp);
-        this.setCroissanceMana(croissanceMana);
-        this.setCroissanceAttaque(croissanceAttaque);
-        this.setCroissanceDefense(croissanceDefense);
-    }
 
 
     //setters
@@ -61,9 +33,7 @@ public class Personnage {
     public void setAttaque(int attaque) {
         this.attaque = attaque;
     }
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
+    public void setDefense(int defense) { this.defense = defense; }
     public void setEtat(String etat) {
         this.etat = etat;
     }
@@ -103,9 +73,7 @@ public class Personnage {
     public void setArmure(Armure armure) {
         this.armure = armure;
     }
-    public void setArme(Arme arme) {
-        this.arme = arme;
-    }
+    public void setArme(Arme arme) { this.arme = arme; }
     public void setCroissanceAttaque(int croissanceAttaque) {
         this.croissanceAttaque = croissanceAttaque;
     }
@@ -118,6 +86,7 @@ public class Personnage {
     public void setCroissanceMana(int croissanceMana) {
         this.croissanceMana = croissanceMana;
     }
+
 
     //getters
     public String getUsername() {
@@ -150,9 +119,7 @@ public class Personnage {
     public int getExpLvlUp() {
         return expLvlUp;
     }
-    public int getHpMax() {
-        return hpMax;
-    }
+    public int getHpMax() { return hpMax; }
     public int getCroissanceExp() {
         return croissanceExp;
     }
@@ -168,15 +135,11 @@ public class Personnage {
     public Arme getArme() {
         return arme;
     }
-    public Armure getArmure() {
-        return armure;
-    }
+    public Armure getArmure() { return armure; }
     public int getCroissanceAttaque() {
         return croissanceAttaque;
     }
-    public int getCroissanceDefense() {
-        return croissanceDefense;
-    }
+    public int getCroissanceDefense() { return croissanceDefense; }
     public int getCroissanceHp() {
         return croissanceHp;
     }
@@ -184,15 +147,42 @@ public class Personnage {
         return croissanceMana;
     }
 
+
+    //constructeur
+    public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int maxMana, int posX, int posY, Arme arme, Armure armure, int croissanceHp, int croissanceMana,int croissanceAttaque, int croissanceDefense){
+        this.setUsername(username);
+        this.setNiveau(niveau);
+        this.setExp(exp);
+        this.setExpLvlUp(expLvlUp);
+        this.setCroissanceExp(50);
+        this.setEtat(etat);
+        this.setHp(hp);
+        this.setHpMax(hpMax);
+        this.setNbPieces(nbPieces);
+        this.setAttaque(attaque);
+        this.setMana(mana);
+        this.setDefense(defense);
+        this.setMaxMana(maxMana);
+        this.setArme(arme);
+        this.setArmure(armure);
+        this.setPosX(posX);
+        this.setPosY(posY);
+        this.setCroissanceHp(croissanceHp);
+        this.setCroissanceMana(croissanceMana);
+        this.setCroissanceAttaque(croissanceAttaque);
+        this.setCroissanceDefense(croissanceDefense);
+    }
+
+
+    //methodes
     /**
-     * Augmente l'expÈrience du personnage par une quantitÈ passÈe en paramËtre.
-     * Si le total d'expÈrience dÈpasse la quantitÈ pour passer un niveau supÈrieur(expLvlUp), le personnage passe au niveau suivant et l'expÈrience en trop y est ajoutÈe. 
-     * 
-     * @param expGagnee quantitÈ d'expÈrience ajoutÈe au total d'expÈrience acquise du personnage
+     * augmente l'exp√©rience du personnage d'une quantit√© pass√©e en param√®tre
+     * et si le total d'exp√©rience d√©passe la quantit√© pour passer un niveau, fait passer ce niveau
+     * @param i quantit√© d'exp√©rience ajout√©e au total du personnage
      */
-    public void expUp(int expGagnee){
-        int newExp = this.getExp() + expGagnee;
-        while (newExp >= this.getExpLvlUp()) {
+    public void expUp(int i){
+        int newExp = this.getExp() + i;
+        while (newExp > this.getExpLvlUp()) {
             newExp -= this.getExpLvlUp();
             this.lvlUp();
         }
@@ -200,39 +190,29 @@ public class Personnage {
     }
 
     /**
-     * IncrÈmente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max.
+     * incr√©mente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max
      */
     public void lvlUp(){
-    	
-    	if(getNiveau() > 50) {
-    		System.out.println("Vous avez atteint le niveau d'expÈrience maximale");
-    	}
-    	else {
-    		this.setNiveau(this.getNiveau() + 1);
-    		this.setExpLvlUp( this.getExpLvlUp() + this.getCroissanceExp());
-    		this.setDefense(this.getDefense() + this.getCroissanceDefense());
-    		this.setAttaque(this.getAttaque() + this.getCroissanceAttaque());
-    		this.setMaxMana(this.getMaxMana() + this.getCroissanceMana());
-    		this.setMana(this.getMaxMana());
-    		this.setHpMax(this.getHpMax() + this.getCroissanceHp());
-    		this.setHp(this.getHpMax());
-    	}
+        this.setNiveau(this.getNiveau() + 1);
+        this.setExpLvlUp( this.getExpLvlUp() + this.getCroissanceExp());
+        this.setDefense(this.getDefense() + this.getCroissanceDefense());
+        this.setAttaque(this.getAttaque() + this.getCroissanceAttaque());
+        this.setMaxMana(this.getMaxMana() + this.getCroissanceMana());
+        this.setMana(this.getMaxMana());
+        this.setHpMax(this.getHpMax() + this.getCroissanceHp());
+        this.setHp(this.getHpMax());
     }
 
 
     /**
-     * Restaure les hp du personnage par la quantitÈ passÈe en paramËtre sans dÈpasser les hpMax.
-     * 
-     * @param hpRestored quantitÈ de hp ajoutÈes au total des hp restants du personnage.
+     * augmente les hp du personnage de la quantit√© pas√©e en param√®tre sans d√©passer les hpMax
+     * @param i quantit√© de hp ajout√©e au total du personnage
      */
-    public void soin(int hpRestored){
+    public void soin(int i){
         this.setMana(this.getMana() - 10);
-        int newHp = this.getHp() + hpRestored;
+        int newHp = this.getHp() +i;
         if (newHp > hpMax){
             this.setHp(hpMax);
-        }
-        else if(getHp() <= 0) {
-        	this.setHp(0);
         }
         else{
             this.setHp(newHp);
@@ -240,40 +220,27 @@ public class Personnage {
     }
 
     /**
-     * Retire des hp ‡†la cible passÈe en paramËtre.
-     * Le retrait d'hp correspondant au coup portÈ par le personnage basÈ sur sa statistique d'attaque et celle de son arme.
-     *
-     * @param cible Ennemi subissant les dÈgats.
+     * retire des hp √©gaux √† la quantit√© pass√©e en param√®tre √† la cible pass√©e en param√®tre
+     * @param cible ennemi subissant les d√©gats
      *
      */
     public void attaque(Mob cible){
-    	
-    	int coup = (this.getAttaque()+this.getArme().getAttaque());
-    	
-    	if(cible.getHp() == 0 || coup > cible.getHp()) {
-    		cible.setHp(0);
-    	}
-    	else {
-    		cible.setHp(cible.getHp() - coup);
-    	}
+        cible.setHp(cible.getHp() - (this.getAttaque()+this.getArme().getAttaque()));
     }
 
-    @Override
-    public String toString() {
-    	return "Personnage: \n "+ username + "\n niveau: "
-                + niveau + "\n exp: "
-                + exp + "\n Etat: "
-                + etat + "\n hp: "
-                + hp + "\n nombre de pieces: "
-                + nbPieces + "\n attaque: "
-                + attaque + "\n defense: "
-                + defense + "\n mana: "
-                + mana + "\n expLvlUp: "
-                + expLvlUp + "\n hpMax: "
-                + hpMax + "\n maxMana: "
-                + maxMana + "\n Arme: "
-                + arme.toString()+ "\n Armure: "
-                + armure.toString();
+    /**
+     * d√©place le personnage sur un axe et d'un nombre de cases pass√©s en param√®tre
+     * @param axe axe du d√©placement
+     * @param speed nombre de cases du d√©placement
+     */
+    public void move(char axe, int speed){
+        switch (axe){
+            case 'x':
+                this.setPosX(this.getPosX()+speed);
+                break;
+            case 'y':
+                this.setPosY(this.getPosY()+speed);
+                break;
+        }
     }
-    
 }
