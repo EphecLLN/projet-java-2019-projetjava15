@@ -1,6 +1,7 @@
 package RPG;
 
-public class Personnage {
+
+public class Personnage{
 
     //attributs
     private String username;
@@ -73,7 +74,9 @@ public class Personnage {
     public void setArmure(Armure armure) {
         this.armure = armure;
     }
-    public void setArme(Arme arme) { this.arme = arme; }
+    public void setArme(Arme arme) { 
+    	this.arme = arme;
+    }
     public void setCroissanceAttaque(int croissanceAttaque) {
         this.croissanceAttaque = croissanceAttaque;
     }
@@ -227,7 +230,42 @@ public class Personnage {
     public void attaque(Mob cible){
         cible.setHp(cible.getHp() - (this.getAttaque()+this.getArme().getAttaque()));
     }
-
+    
+    /**
+     * MÈthode permettant l'achat d'armes.
+     * 
+     * @param sh RÈfÈrence ‡ la boutique
+     * @param i indice de l'arme choisi
+     */
+    public void acheterArme(Shop sh, int i){
+    	if(getNbPieces() >= sh.getArmesDispo().get(i).getPrix()) {
+    		setArme(sh.getArmesDispo().get(i));
+    		setNbPieces(getNbPieces() - sh.getArmesDispo().get(i).getPrix());
+    		System.out.println("Vous avez obtenu une nouvelle arme!");
+    	}
+    	else {
+    		System.out.println("nombre de piËce insuffisants");
+    	}
+    }
+    
+    /**
+     * MÈthode permettant l'achat d'armures
+     * 
+     * @param sh RÈfÈrence ‡ la boutique
+     * @param i indice de l'armure choisi
+     */
+    public void acheterArmure(Shop sh, int i){
+    	if(getNbPieces() >= sh.getArmuresDispo().get(i).getPrix()) {
+    		setArmure(sh.getArmuresDispo().get(i));
+    		setNbPieces(getNbPieces() - sh.getArmuresDispo().get(i).getPrix());
+    		System.out.println("Vous avez obtenu une nouvelle armure!");
+    	}
+    	else {
+    		System.out.println("nombre de piËce insuffisants");
+    	}
+    }
+    
+    
     /**
      * d√©place le personnage sur un axe et d'un nombre de cases pass√©s en param√®tre
      * @param axe axe du d√©placement
