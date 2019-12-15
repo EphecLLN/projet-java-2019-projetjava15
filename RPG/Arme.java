@@ -7,6 +7,7 @@ public class Arme {
     private int niveau; // tier de l'équipement(0=base, 1=amélioré ou 2=meilleur)
     private int puissanceMagique;
     private int attaque;
+    private int prix = 50;
 
 
     //setters
@@ -36,13 +37,17 @@ public class Arme {
     public int getPuissanceMagique() {
         return puissanceMagique;
     }
+    
+    public int getPrix() {
+    	return prix;
+    }
 
     //constructeur
     public Arme(String type, int niveau){
         this.setNiveau(niveau);
         this.setType(type);
         switch (type){
-            case "épée":
+            case "�p�e":
                 this.setAttaque((int) (5* Math.pow(2, niveau)));
                 this.setPuissanceMagique(0);
                 break;
@@ -56,5 +61,12 @@ public class Arme {
                 break;
         }
     }
+	@Override
+	public String toString() {
+		return "type:" + type + ", niveau:" + niveau + ", puissanceMagique:" + puissanceMagique + " attaque:"
+				+ attaque + ", prix: "+ prix + "\n";
+	}
+    
+    
 
 }

@@ -1,6 +1,8 @@
 package RPG;
 
-public class Mob {
+import java.util.Observable;
+
+public class Mob extends Observable{
 
     //attributs
     private int hp;
@@ -12,6 +14,8 @@ public class Mob {
     //setters
     public void setHp(int hp) {
         this.hp = hp;
+        setChanged();
+        notifyObservers();
     }
     public void setAttaque(int attaque) {
         this.attaque = attaque;

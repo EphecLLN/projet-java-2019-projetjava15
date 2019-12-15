@@ -4,6 +4,7 @@ public class Armure {
     private String type;//cape, armure ou robe
     private int niveau;// tier de l'armure(base, améliorée ou meilleure)
     private int defense;
+    private int prix = 40;
 
     //setters
     public void setType(String type) {
@@ -26,6 +27,10 @@ public class Armure {
     public int getDefense() {
         return defense;
     }
+    
+    public int getPrix() {
+    	return prix;
+    }
 
 
 
@@ -45,4 +50,8 @@ public class Armure {
         }
 
     }
+	@Override
+	public String toString() {
+		return "type:" + type + ", niveau:" + niveau + ", defense:" + defense + ", prix: "+ prix + "\n";
+	}
 }

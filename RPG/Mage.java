@@ -24,6 +24,7 @@ public class Mage extends Personnage {
      * @param type type des dégats ("feu", "foudre" ou "glace")
      */
     public void sort(Mob cible, String type){
+    	this.setMana(this.getMana() - 40);
         int degats = this.getPuissanceMagique()+this.getArme().getPuissanceMagique();
         if (cible.getFaiblesse() == type){
             degats *=2;

@@ -1,7 +1,8 @@
 package RPG;
 
+import java.util.Observable;
 
-public class Personnage{
+public class Personnage extends Observable{
 
     //attributs
     private String username;
@@ -30,64 +31,108 @@ public class Personnage{
     //setters
     public void setUsername(String username) {
         this.username = username;
+        setChanged();
+        notifyObservers();
     }
     public void setAttaque(int attaque) {
         this.attaque = attaque;
+        setChanged();
+        notifyObservers();
     }
-    public void setDefense(int defense) { this.defense = defense; }
+    public void setDefense(int defense) { 
+    	this.defense = defense; 
+    	setChanged();
+    	notifyObservers();
+    }
     public void setEtat(String etat) {
         this.etat = etat;
+        setChanged();
+        notifyObservers();
     }
     public void setExp(int exp) {
         this.exp = exp;
+        setChanged();
+        notifyObservers();
     }
     public void setHp(int hp) {
         this.hp = hp;
+        setChanged();
+        notifyObservers();
     }
     public void setMana(int mana) {
         this.mana = mana;
+        setChanged();
+        notifyObservers();
     }
     public void setNbPieces(int nbPieces) {
         this.nbPieces = nbPieces;
+        setChanged();
+        notifyObservers();
     }
     public void setNiveau(int niveau) {
         this.niveau = niveau;
+        setChanged();
+        notifyObservers();
     }
     public void setExpLvlUp(int expLvlUp) {
         this.expLvlUp = expLvlUp;
+        setChanged();
+        notifyObservers();
     }
     public void setHpMax(int hpMax) {
         this.hpMax = hpMax;
+        setChanged();
+        notifyObservers();
     }
     public void setCroissanceExp(int croissanceExp) {
         this.croissanceExp = croissanceExp;
+        setChanged();
+        notifyObservers();
     }
     public void setMaxMana(int maxMana) {
         this.maxMana = maxMana;
+        setChanged();
+        notifyObservers();
     }
     public void setPosX(int posX) {
         this.posX = posX;
+        setChanged();
+        notifyObservers();
     }
     public void setPosY(int posY) {
         this.posY = posY;
+        setChanged();
+        notifyObservers();
     }
     public void setArmure(Armure armure) {
         this.armure = armure;
+        setChanged();
+        notifyObservers();
     }
     public void setArme(Arme arme) { 
     	this.arme = arme;
+    	setChanged();
+        notifyObservers();
     }
     public void setCroissanceAttaque(int croissanceAttaque) {
         this.croissanceAttaque = croissanceAttaque;
+        setChanged();
+        notifyObservers();
     }
     public void setCroissanceDefense(int croissanceDefense) {
         this.croissanceDefense = croissanceDefense;
+        setChanged();
+        notifyObservers();
     }
     public void setCroissanceHp(int croissanceHp) {
         this.croissanceHp = croissanceHp;
+        setChanged();
+        notifyObservers();
     }
     public void setCroissanceMana(int croissanceMana) {
         this.croissanceMana = croissanceMana;
+        setChanged();
+        notifyObservers();
     }
 
 
@@ -185,7 +230,7 @@ public class Personnage{
      */
     public void expUp(int i){
         int newExp = this.getExp() + i;
-        while (newExp > this.getExpLvlUp()) {
+        while (newExp >= this.getExpLvlUp()) {
             newExp -= this.getExpLvlUp();
             this.lvlUp();
         }
@@ -196,6 +241,10 @@ public class Personnage{
      * incrÃ©mente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max
      */
     public void lvlUp(){
+    	if(getNiveau() >= 100) {
+    		System.out.println("Vous avez atteint le niveau d'expérience maximale");
+    	}
+    	else {
         this.setNiveau(this.getNiveau() + 1);
         this.setExpLvlUp( this.getExpLvlUp() + this.getCroissanceExp());
         this.setDefense(this.getDefense() + this.getCroissanceDefense());
@@ -204,6 +253,7 @@ public class Personnage{
         this.setMana(this.getMaxMana());
         this.setHpMax(this.getHpMax() + this.getCroissanceHp());
         this.setHp(this.getHpMax());
+    	}
     }
 
 
@@ -212,10 +262,13 @@ public class Personnage{
      * @param i quantitÃ© de hp ajoutÃ©e au total du personnage
      */
     public void soin(int i){
-        this.setMana(this.getMana() - 10);
-        int newHp = this.getHp() +i;
+    	this.setMana(this.getMana() - 10);
+        int newHp = this.getHp() + i;
         if (newHp > hpMax){
             this.setHp(hpMax);
+        }
+        else if(getHp() <= 0) {
+        	this.setHp(0);
         }
         else{
             this.setHp(newHp);
@@ -228,7 +281,12 @@ public class Personnage{
      *
      */
     public void attaque(Mob cible){
+    	if(cible.getHp() == 0 || this.getAttaque()+this.getArme().getAttaque() > cible.getHp()) {
+    		cible.setHp(0);
+    	}
+    	else {
         cible.setHp(cible.getHp() - (this.getAttaque()+this.getArme().getAttaque()));
+    	}
     }
     
     /**
@@ -238,14 +296,19 @@ public class Personnage{
      * @param i indice de l'arme choisi
      */
     public void acheterArme(Shop sh, int i){
-    	if(getNbPieces() >= sh.getArmesDispo().get(i).getPrix()) {
-    		setArme(sh.getArmesDispo().get(i));
-    		setNbPieces(getNbPieces() - sh.getArmesDispo().get(i).getPrix());
-    		System.out.println("Vous avez obtenu une nouvelle arme!");
+    	try {
+    		if(getNbPieces() >= sh.getArmesDispo().get(i).getPrix() || i > sh.getArmesDispo().size() || i > sh.getArmesDispo().size() || i < 0) {
+    			setArme(sh.getArmesDispo().get(i));
+    			setNbPieces(getNbPieces() - sh.getArmesDispo().get(i).getPrix());
+    			System.out.println("Vous avez obtenu une nouvelle arme!");
+    		}
+    		else {
+    			System.out.println("nombre de pièce insuffisants pour une nouvelle arme");
+    		}
     	}
-    	else {
-    		System.out.println("nombre de pièce insuffisants");
-    	}
+    	catch(Exception e) {
+    		System.out.println("Erreur, indice hors intervalle");
+    		}
     }
     
     /**
@@ -255,15 +318,20 @@ public class Personnage{
      * @param i indice de l'armure choisi
      */
     public void acheterArmure(Shop sh, int i){
-    	if(getNbPieces() >= sh.getArmuresDispo().get(i).getPrix()) {
-    		setArmure(sh.getArmuresDispo().get(i));
-    		setNbPieces(getNbPieces() - sh.getArmuresDispo().get(i).getPrix());
-    		System.out.println("Vous avez obtenu une nouvelle armure!");
+    	try {
+    		if(getNbPieces() >= sh.getArmuresDispo().get(i).getPrix()) {
+    			setArmure(sh.getArmuresDispo().get(i));
+    			setNbPieces(getNbPieces() - sh.getArmuresDispo().get(i).getPrix());
+    			System.out.println("Vous avez obtenu une nouvelle armure!");
+    		}
+    		else {
+    		System.out.println("nombre de pièce insuffisants pour une nouvelle armure");
+    		}
     	}
-    	else {
-    		System.out.println("nombre de pièce insuffisants");
+    	catch(Exception e) {
+    		System.out.println("Erreur, indice hors intervalle");
+    		}
     	}
-    }
     
     
     /**
@@ -281,4 +349,22 @@ public class Personnage{
                 break;
         }
     }
+    
+    public String toString() {
+    	return "Personnage: \n "+ username + "\n niveau: "
+                + niveau + "\n exp: "
+                + exp + "\n Etat: "
+                + etat + "\n hp: "
+                + hp + "\n nb de pieces: "
+                + nbPieces + "\n attaque: "
+                + attaque + "\n defense: "
+                + defense + "\n mana: "
+                + mana + "\n expLvlUp: "
+                + expLvlUp + "\n hpMax: "
+                + hpMax + "\n maxMana: "
+                + maxMana + "\n";// Arme: "
+                //+ arme.toString()+ "\n Armure: "
+                //+ armure.toString();
+    }
+    
 }
