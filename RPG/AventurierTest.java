@@ -2,8 +2,6 @@ package RPG;
 
 import org.junit.jupiter.api.Assertions;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AventurierTest {
 
     @org.junit.jupiter.api.Test
