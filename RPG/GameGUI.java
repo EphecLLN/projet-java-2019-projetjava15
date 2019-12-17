@@ -436,7 +436,7 @@ public class GameGUI extends GameVue implements ActionListener {
 		buyStaffButton.setFocusPainted(false);
 		buyStaffButton.addActionListener(this);
 		
-		buyCloakButton = new JButton("Buye");
+		buyCloakButton = new JButton("Buy");
 		buyCloakButton.setBackground(Color.black);
 		buyCloakButton.setForeground(Color.white);
 		buyCloakButton.setFont(new Font("Times New Roman",Font.PLAIN,30));
