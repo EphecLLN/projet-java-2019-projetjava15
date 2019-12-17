@@ -2,6 +2,12 @@ package RPG;
 
 import org.junit.jupiter.api.Assertions;
 
+/**
+ * @authors Lebas Yaël & Mugisha Rodrigue
+ * 
+ * 
+ *
+ */
 class AventurierTest {
 
     @org.junit.jupiter.api.Test

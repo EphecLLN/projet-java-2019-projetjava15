@@ -1,8 +1,14 @@
 package RPG;
 
+/**
+ * @authors Lebas Yaël & Mugisha Rodrigue
+ * 
+ * L'armure se présentant sous plusieurs formes: cape, armure ou robe et ayant un niveau correspondant son niveau de puissance.
+ *
+ */
 public class Armure {
     private String type;//cape, armure ou robe
-    private int niveau;// tier de l'armure(base, amÃ©liorÃ©e ou meilleure)
+    private int niveau;// tier de l'armure(0=base, 1=amélioré ou 2=meilleur)
     private int defense;
     private int prix = 40;
 

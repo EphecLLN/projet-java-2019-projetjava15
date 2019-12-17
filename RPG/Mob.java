@@ -2,14 +2,18 @@ package RPG;
 
 import java.util.Observable;
 
+/**
+ * @authors Lebas Yaël & Mugisha Rodrigue
+ * 
+ * 
+ *
+ */
 public class Mob extends Observable{
 
     //attributs
     private int hp;
     private int attaque;
     private String faiblesse;
-    private int posX;
-    private int posY;
 
     //setters
     public void setHp(int hp) {
@@ -23,8 +27,6 @@ public class Mob extends Observable{
     public void setFaiblesse(String faiblesse) {
         this.faiblesse = faiblesse;
     }
-    public void setPosX(int posX) { this.posX = posX; }
-    public void setPosY(int posY) { this.posY = posY; }
 
     //getters
     public int getHp() {
@@ -36,29 +38,50 @@ public class Mob extends Observable{
     public String getFaiblesse() {
         return faiblesse;
     }
-    public int getPosX() {return posX; }
-    public int getPosY() { return posY; }
 
     //constructeurs
-    public Mob(int hp, int attaque, String faiblesse, int posX, int posY) {
+    public Mob(int hp, int attaque, String faiblesse) {
         this.setAttaque(attaque);
         this.setHp(hp);
         this.setFaiblesse(faiblesse);
-        this.setPosX(posX);
-        this.setPosY(posY);
     }
 
 
-    //mÃ©thodes
+    //méthodes
+    
+    /**
+     * Méthode permettant au mob d'infliger des dégats au personnage.
+     * 
+     * @param cible personnage subissant les dégats
+     *
+     */ 
     public void attaque(Personnage cible) {
         int degats = (this.getAttaque() - (cible.getDefense() + cible.getArmure().getDefense()));
-        if (degats <= 0) {
-            degats = 1;
+        
+        if(cible.getHp() > 0 && degats > 0) {
+        		cible.setHp(cible.getHp() - degats);
         }
-        cible.setHp(cible.getHp() - degats);
+        else if (cible.getHp() > 0 && degats <= 0) {
+            degats = 1;
+            cible.setHp(cible.getHp() - degats);
+        }
+        else if(cible.getHp() <= 0) {
+        	cible.setHp(0);
+        }
     }
 
+    /**
+     * Méthode permettant au mob d'infliger l'état "stun" au personnage lui donnant des malus.
+     * 
+     * @param cible personnage subissant le stun.
+     *
+     */ 
     public void stun(Personnage cible) {
-        cible.setEtat("stun");
+    	if(cible.equals(null)) {
+    		System.out.println("Aucune cible pour le stun !");
+    	}
+    	else {
+    		cible.setEtat("stun");
+    	}
     }
 }

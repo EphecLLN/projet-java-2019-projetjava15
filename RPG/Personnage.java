@@ -2,6 +2,13 @@ package RPG;
 
 import java.util.Observable;
 
+/**
+ * @authors Lebas YaÎl & Mugisha Rodrigue
+ * 
+ * Classe reprÈsantant un personnage pouvant effectuer plusieurs actions tels que attaquer, se soigner, acheter de l'Èquipement via des piËces.
+ * Il Èvolue par l'expÈrience qu'il gagne ‡ chaque fin de chaque combat, le niveau maximum Ètant le niveau 100.
+ *
+ */
 public class Personnage extends Observable{
 
     //attributs
@@ -196,7 +203,9 @@ public class Personnage extends Observable{
     }
 
 
-    //constructeur
+    /*
+     * Constructeur initialisant le personnage avec tout ses attributs
+     */
     public Personnage(String username, int niveau, int exp, String etat, int hp, int nbPieces, int attaque, int defense, int mana, int expLvlUp, int hpMax, int maxMana, int posX, int posY, Arme arme, Armure armure, int croissanceHp, int croissanceMana,int croissanceAttaque, int croissanceDefense){
         this.setUsername(username);
         this.setNiveau(niveau);
@@ -224,9 +233,9 @@ public class Personnage extends Observable{
 
     //methodes
     /**
-     * augmente l'exp√©rience du personnage d'une quantit√© pass√©e en param√®tre
-     * et si le total d'exp√©rience d√©passe la quantit√© pour passer un niveau, fait passer ce niveau
-     * @param i quantit√© d'exp√©rience ajout√©e au total du personnage
+     * augmente l'expÈrience du personnage d'une quantitÈ passÈe en paramËtre
+     * et si le total d'expÈrience dÈpasse la quantitÈ pour passer un niveau, fait passer ce niveau
+     * @param i quantitÈ d'expÈrience ajoutÈe au total du personnage
      */
     public void expUp(int i){
         int newExp = this.getExp() + i;
@@ -238,7 +247,7 @@ public class Personnage extends Observable{
     }
 
     /**
-     * incr√©mente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max
+     * incrÈmente le niveau du personnage et ses stats qui ont une croissance par niveau et remet ses hp et son mana au max
      */
     public void lvlUp(){
     	if(getNiveau() >= 100) {
@@ -258,8 +267,8 @@ public class Personnage extends Observable{
 
 
     /**
-     * augmente les hp du personnage de la quantit√© pas√©e en param√®tre sans d√©passer les hpMax
-     * @param i quantit√© de hp ajout√©e au total du personnage
+     * augmente les hp du personnage de la quantitÈ pasÈe en paramËtre sans dÈpasser les hpMax
+     * @param i quantitÈ de hp ajoutÈe au total du personnage
      */
     public void soin(int i){
     	this.setMana(this.getMana() - 10);
@@ -276,12 +285,12 @@ public class Personnage extends Observable{
     }
 
     /**
-     * retire des hp √©gaux √† la quantit√© pass√©e en param√®tre √† la cible pass√©e en param√®tre
-     * @param cible ennemi subissant les d√©gats
+     * Retire des hp Ègaux √† la quantitÈ passÈe en paramËtre √† la cible passÈe en paramËtre
+     * @param cible ennemi subissant les dÈgats
      *
      */
     public void attaque(Mob cible){
-    	if(cible.getHp() == 0 || this.getAttaque()+this.getArme().getAttaque() > cible.getHp()) {
+    	if(cible.getHp() <= 0 || this.getAttaque()+this.getArme().getAttaque() > cible.getHp()) {
     		cible.setHp(0);
     	}
     	else {
@@ -333,23 +342,6 @@ public class Personnage extends Observable{
     		}
     	}
     
-    
-    /**
-     * d√©place le personnage sur un axe et d'un nombre de cases pass√©s en param√®tre
-     * @param axe axe du d√©placement
-     * @param speed nombre de cases du d√©placement
-     */
-    public void move(char axe, int speed){
-        switch (axe){
-            case 'x':
-                this.setPosX(this.getPosX()+speed);
-                break;
-            case 'y':
-                this.setPosY(this.getPosY()+speed);
-                break;
-        }
-    }
-    
     public String toString() {
     	return "Personnage: \n "+ username + "\n niveau: "
                 + niveau + "\n exp: "
@@ -362,9 +354,9 @@ public class Personnage extends Observable{
                 + mana + "\n expLvlUp: "
                 + expLvlUp + "\n hpMax: "
                 + hpMax + "\n maxMana: "
-                + maxMana + "\n";// Arme: "
-                //+ arme.toString()+ "\n Armure: "
-                //+ armure.toString();
+                + maxMana + "\n Arme: "
+                + arme.toString()+ "\n Armure: "
+                + armure.toString();
     }
     
 }

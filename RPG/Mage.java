@@ -1,5 +1,11 @@
 package RPG;
 
+/**
+ * @authors Lebas Yaël & Mugisha Rodrigue
+ * 
+ * Catégorie de personnage se caractérisant par ses sorts lançant des attaques puissantes.
+ *
+ */
 public class Mage extends Personnage {
 
     private int puissanceMagique;
@@ -18,18 +24,34 @@ public class Mage extends Personnage {
     }
 
     /**
-     * inflige des dÃ©gats, Ã©gaux Ã  la puissance magique, de type spÃ©cifiÃ© en paramÃ¨tre Ã  la cible passÃ©e en paramÃ¨tre,
-     *  et si le type de dÃ©gats correspond Ã  la faiblesse de l'ennemi, les dÃ©gats sont doublÃ©s
-     * @param cible ennemi auquel on inflige les dÃ©gats
-     * @param type type des dÃ©gats ("feu", "foudre" ou "glace")
+     * inflige des dégats, égaux à  la puissance magique, de type spécifié en paramètre à  la cible passée en paramètre.
+     *  Si le type de dégats correspond à une faiblesse de l'ennemi, les dégats seront doublés, triplés voire quadruplés.
+     *  
+     * @param cible ennemi auquel on inflige les dégats
+     * @param type type des dégats ("feu", "foudre" ou "glace")
      */
-    public void sort(Mob cible, String type){
+    public void sort(Mob cible){
     	this.setMana(this.getMana() - 40);
         int degats = this.getPuissanceMagique()+this.getArme().getPuissanceMagique();
-        if (cible.getFaiblesse() == type){
-            degats *=2;
+        
+        if(this.getMana() <= 0){
+        	this.setMana(0);
         }
-        cible.setHp(cible.getHp() - degats);
+        else if(cible.getHp() <= 0 || degats > cible.getHp()) {
+    		cible.setHp(0);
+    	}
+        else if (cible.getFaiblesse() == "feu" && cible.getHp() > 0 && this.getMana() > 0){
+            degats *= 2;
+            cible.setHp(cible.getHp() - degats);
+        }
+        else if (cible.getFaiblesse() == "glace" && cible.getHp() > 0 && this.getMana() > 0){
+            degats *= 3;
+            cible.setHp(cible.getHp() - degats);
+        }
+        else if (cible.getFaiblesse() == "foudre" && cible.getHp() > 0 && this.getMana() > 0){
+            degats *= 4;
+            cible.setHp(cible.getHp() - degats);
+        }
     }
 
 }

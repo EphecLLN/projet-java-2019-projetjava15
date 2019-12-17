@@ -1,10 +1,16 @@
 package RPG;
 
+/**
+ * @authors Lebas Yaël & Mugisha Rodrigue
+ * 
+ * L'arme se présentant sous plusieurs formes: epée, baton ou dague et ayant un niveau correspondant son niveau de puissance.
+ *
+ */
 public class Arme {
 
     //attributs
-    private String type; // Ã©pÃ©e, baton ou dague
-    private int niveau; // tier de l'Ã©quipement(0=base, 1=amÃ©liorÃ© ou 2=meilleur)
+    private String type; // epée, baton ou dague
+    private int niveau; // tier de l'arme(0=base, 1= amélioré ou 2= meilleur)
     private int puissanceMagique;
     private int attaque;
     private int prix = 50;
